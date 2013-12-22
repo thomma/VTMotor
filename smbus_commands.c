@@ -23,12 +23,13 @@
 #include "smbus_commands.h"
 #include "motor_driver_commands.h"
 #include "motor.h"
+#include "storage.h"
 
 static void WhoAmI(SMBData *smb);
 static void EnableMotors(SMBData *smb);
 static void DisableMotors(SMBData *smb);
 static void SetSpeed(SMBData *smb);
-static void SetDerection(SMBData *smb);
+static void SetDirection(SMBData *smb);
 static void SetAddress(SMBData *smb);
 static void UndefinedCommand(SMBData *smb);
 static void UndefinedCommand(SMBData *smb);
@@ -54,7 +55,7 @@ void ProcessMessage(SMBData *smb)
     WhoAmI(smb);
     break;
   case DRV_SET_DIRECTION:
-    SetDerection(smb);
+    SetDirection(smb);
     break;
   case DRV_SET_SPEED:
     SetSpeed(smb);
@@ -123,7 +124,7 @@ static inline void SetSpeed(SMBData *smb)
   smb->state = SMB_STATE_IDLE;
 }
 
-static inline void SetDerection(SMBData *smb)
+static inline void SetDirection(SMBData *smb)
 {
   if (smb->rxCount != 3)
   {
@@ -144,7 +145,7 @@ static inline void SetAddress(SMBData *smb)
     return;
   }
 
-  eeprom_update_byte((uint8_t *)addr, smb->rxBuffer[1]);
+  StoreAddr(smb->rxBuffer[1]);
 
   smb->state = SMB_STATE_IDLE;
 }

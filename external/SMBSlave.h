@@ -1,8 +1,6 @@
 #ifndef __SMB_SLAVE_H__
 #define __SMB_SLAVE_H__
 
-//! The 7 bit slave address of this device.
-#define SMB_OWN_ADDRESS       0x28
 
 /*!
  *  Maximum number of data bytes received for Block write and Block write,

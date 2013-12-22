@@ -24,10 +24,10 @@ void SMBusInit(uint8_t addr)
     TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWIE) | (1 << TWEA);
 	
 	//! Value of slave address with write bit appended (used for PEC calculation/lookup).
-	uint8_t SMB_OWN_ADDRESS_W = ((addr << 1) | SMB_WRITE);
+	//uint8_t SMB_OWN_ADDRESS_W = ((addr << 1) | SMB_WRITE);
 
 	//! Value of slave address with read bit appended (used for PEC calculation/lookup).
-	uint8_t SMB_OWN_ADDRESS_R = ((addr << 1) | SMB_READ);
+	//uint8_t SMB_OWN_ADDRESS_R = ((addr << 1) | SMB_READ);
 }
 
 

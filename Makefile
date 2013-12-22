@@ -3,8 +3,8 @@ CFLAGS=-g -Os -Wall -mcall-prologues -mmcu=atmega8
 OBJ2HEX=avr-objcopy
 UISP=avrdude
 TARGET=board
-OBJECTS11= main.o motor.o smbus_commands.o external/SMBSlave.c
-OBJECTS12= main1.2.o motor1.2.o smbus_commands.o external/SMBSlave.c
+OBJECTS11= main.o motor.o smbus_commands.o external/SMBSlave.c storage.o
+OBJECTS12= main1.2.o motor1.2.o smbus_commands.o external/SMBSlave.c storage.o
 
 TARGET11=$(TARGET).v1.1
 TARGET12=$(TARGET).v1.2

@@ -22,6 +22,7 @@
 
 #include "motor.h"
 #include "external/SMBSlave.h"
+#include "storage.h"
 
 /* TIMER */
 inline void conf_TMR0()
@@ -34,7 +35,7 @@ inline void conf_TMR0()
 
 inline void configure()
 {
-	uint8_t addr = eeprom_read_byte((uint8_t*)0);
+	uint8_t addr = GetAddr();
   // Initialize SMBus
    SMBusInit(addr);
   SMBEnable();
