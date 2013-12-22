@@ -29,6 +29,7 @@ static void EnableMotors(SMBData *smb);
 static void DisableMotors(SMBData *smb);
 static void SetSpeed(SMBData *smb);
 static void SetDerection(SMBData *smb);
+static void SetAddress(SMBData *smb);
 static void UndefinedCommand(SMBData *smb);
 static void UndefinedCommand(SMBData *smb);
 
@@ -60,6 +61,9 @@ void ProcessMessage(SMBData *smb)
     break;
   case DRV_DRV_ENABLE:
     EnableMotors(smb);
+    break;
+  case DRV_SET_ADDRESS:
+    SetAddress(smb);
     break;
   case DRV_DRV_DISABLE:
     DisableMotors(smb);
@@ -128,6 +132,19 @@ static inline void SetDerection(SMBData *smb)
   }
 
   drv_set_direction(smb->rxBuffer[1], smb->rxBuffer[2]);
+
+  smb->state = SMB_STATE_IDLE;
+}
+
+static inline void SetAddress(SMBData *smb)
+{
+  if (smb->rxCount != 1)
+  {
+    smb->error = TRUE;
+    return;
+  }
+
+  eeprom_update_byte((uint8_t *)addr, smb->rxBuffer[1]);
 
   smb->state = SMB_STATE_IDLE;
 }

@@ -23,6 +23,7 @@
 #define DRV_DRV_DISABLE     0x12
 #define DRV_SET_SPEED       0x13
 #define DRV_SET_DIRECTION   0x14
+#define DRV_SET_ADDRESS		0x15
 
 #define DRV_DIR_FORWARD     0x0
 #define DRV_DIR_BACK        0x1

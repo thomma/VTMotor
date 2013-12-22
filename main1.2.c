@@ -22,6 +22,15 @@
 #include "motor.h"
 #include "external/SMBSlave.h"
 
+#define DRV_SW_PORT   	PORTC
+
+#define DRV_SW0_PIN    	0b00000001
+#define DRV_SW1_PIN    	0b00000010
+#define DRV_SW2_PIN    	0b00000100
+#define DRV_SW3_PIN    	0b00001000
+
+#define DRV_SW_DDR     	DDRC
+
 /* TIMER */
 inline void conf_TMR0()
 {
@@ -32,9 +41,17 @@ inline void conf_TMR0()
 }
 
 inline void configure()
-{
+{  
+  /* Set switch pins to input */
+  DRV_SW_DDR  |= (DRV_SW0_PIN|DRV_SW1_PIN|DRV_SW2_PIN|DRV_SW3_PIN);  
+  
+  /* Set switch pins to high impedance */
+  DRV_SW_PORT &= ~(DRV_SW0_PIN|DRV_SW1_PIN|DRV_SW2_PIN|DRV_SW3_PIN);
+  
+  uint8_t addr = 0b00001111 & DRV_SW_PORT;
+  
   // Initialize SMBus
-  SMBusInit();
+  SMBusInit(addr);
   SMBEnable();
 
   conf_TMR0();

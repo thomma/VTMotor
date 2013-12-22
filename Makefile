@@ -4,7 +4,7 @@ OBJ2HEX=avr-objcopy
 UISP=avrdude
 TARGET=board
 OBJECTS11= main.o motor.o smbus_commands.o external/SMBSlave.c
-OBJECTS12= main.o motor1.2.o smbus_commands.o external/SMBSlave.c
+OBJECTS12= main1.2.o motor1.2.o smbus_commands.o external/SMBSlave.c
 
 TARGET11=$(TARGET).v1.1
 TARGET12=$(TARGET).v1.2

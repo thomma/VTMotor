@@ -18,6 +18,7 @@
  */
 
 #include <avr/io.h>
+#include <avr/eeprom.h>
 
 #include "motor.h"
 #include "external/SMBSlave.h"
@@ -33,8 +34,9 @@ inline void conf_TMR0()
 
 inline void configure()
 {
+	uint8_t addr = eeprom_read_byte((uint8_t*)0);
   // Initialize SMBus
-  SMBusInit(0x28);
+   SMBusInit(addr);
   SMBEnable();
 
   conf_TMR0();
