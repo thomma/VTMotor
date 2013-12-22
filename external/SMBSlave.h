@@ -33,15 +33,6 @@
 //! Value of write bit appended after slave address in SMBus communication.
 #define SMB_WRITE                       0
 
-//! Value of read bit appended after slave address in SMBus communication.
-#define SMB_READ                        1
-
-//! Value of slave address with write bit appended (used for PEC calculation/lookup).
-#define SMB_OWN_ADDRESS_W               ((SMB_OWN_ADDRESS << 1) | SMB_WRITE)
-
-//! Value of slave address with reaad bit appended (used for PEC calculation/lookup).
-#define SMB_OWN_ADDRESS_R               ((SMB_OWN_ADDRESS << 1) | SMB_READ)
-
 #define SMB_STATE_IDLE                  0x00    //!< Idle state flag.
 #define SMB_STATE_READ_REQUESTED        0x01    //!< Read requested flag.
 #define SMB_STATE_WRITE_REQUESTED       0x02    //!< Write requested flag.
@@ -53,7 +44,7 @@
 
 
 // Function prototypes.
-void SMBusInit(void);
+void SMBusInit(uint8_t addr);
 void SMBEnable(void);
 void SMBDisable(void);
 

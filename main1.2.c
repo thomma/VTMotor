@@ -34,7 +34,7 @@ inline void conf_TMR0()
 inline void configure()
 {
   // Initialize SMBus
-  SMBusInit(0x28);
+  SMBusInit();
   SMBEnable();
 
   conf_TMR0();

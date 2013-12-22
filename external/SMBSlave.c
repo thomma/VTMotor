@@ -16,12 +16,18 @@ uint8_t SMBError(void);
  *
  *  This function initializes the TWI module for SMBus operation.
  */
-void SMBusInit()
+void SMBusInit(uint8_t addr)
 {
     // Set own slave address
-    TWAR = SMB_OWN_ADDRESS << 1;
+    TWAR = addr << 1;
     // Enable TWI-interface, enable ACK, enable interrupt, clear interrupt flag
     TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWIE) | (1 << TWEA);
+	
+	//! Value of slave address with write bit appended (used for PEC calculation/lookup).
+	uint8_t SMB_OWN_ADDRESS_W = ((addr << 1) | SMB_WRITE);
+
+	//! Value of slave address with read bit appended (used for PEC calculation/lookup).
+	uint8_t SMB_OWN_ADDRESS_R = ((addr << 1) | SMB_READ);
 }
 
 
